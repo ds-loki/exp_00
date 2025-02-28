@@ -20,7 +20,7 @@ RUN wget https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/m
 # Copy files  
 COPY api.py /app/api.py  
 COPY run.sh /app/run.sh  
-
+RUN sed -i 's/\r$//' /app/run.sh
 # Give execution permissions to the script  
 RUN chmod +x /app/run.sh  
 
