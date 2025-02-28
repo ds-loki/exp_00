@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t mistral-gguf-api . && docker run --rm -p 8000:8000 mistral-gguf-api
+uvicorn api:app --host 0.0.0.0 --port 8000
