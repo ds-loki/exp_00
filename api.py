@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 from llama_cpp import Llama
 
 app = FastAPI()
@@ -8,7 +9,10 @@ llm = Llama(model_path="/app/mistral.gguf")  # Load GGUF model
 async def health():
     return {"status": "OK"}
 
+class GenerateRequest(BaseModel):
+    prompt: str
+    max_tokens: int = 100
+
 @app.post("/generate")
-async def generate(prompt: str, max_tokens: int = 100):
-    output = llm(prompt, max_tokens=max_tokens)
-    return {"response": output["choices"][0]["text"]}
+async def generate(request: GenerateRequest):
+    return {"prompt": request.prompt, "max_tokens": request.max_tokens}
