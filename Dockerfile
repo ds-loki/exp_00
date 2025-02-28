@@ -17,11 +17,15 @@ RUN pip3 install fastapi uvicorn llama-cpp-python
 WORKDIR /app  
 RUN wget https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf -O mistral.gguf  
 
-# Copy API script  
+# Copy files  
 COPY api.py /app/api.py  
+COPY run.sh /app/run.sh  
+
+# Give execution permissions to the script  
+RUN chmod +x /app/run.sh  
 
 # Expose API port  
 EXPOSE 8000  
 
-# Run API  
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run script  
+CMD ["/app/run.sh"]
