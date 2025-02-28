@@ -15,4 +15,5 @@ class GenerateRequest(BaseModel):
 
 @app.post("/generate")
 async def generate(request: GenerateRequest):
-    return {"prompt": request.prompt, "max_tokens": request.max_tokens}
+    output = llm(request.prompt, max_tokens=request.max_tokens)  # Call Llama model
+    return {"response": output["choices"][0]["text"]}  # Return generated text
