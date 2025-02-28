@@ -11,7 +11,7 @@ WORKDIR /app/llama.cpp
 RUN cmake . && make -j4  
 
 # Install Python dependencies  
-RUN pip3 install fastapi uvicorn llama-cpp-python pydantic
+RUN pip3 install fastapi uvicorn llama-cpp-python pydantic starlette
 
 # Download GGUF model  
 WORKDIR /app  
