@@ -16,11 +16,8 @@ class GenerateRequest(BaseModel):
 
 @app.post("/generate")
 async def generate(request: GenerateRequest):
-    # Automatically apply the correct Mistral Instruct format
-    formatted_prompt = f"<s>[INST] {request.prompt.strip()} [/INST]"
-
     # Run the blocking model call in a thread pool
-    output = await run_in_threadpool(llm, formatted_prompt, max_tokens=request.max_tokens)
+    output = await run_in_threadpool(llm, request.prompt, max_tokens=request.max_tokens)
 
     # Extract response text and stop at the EOS token if present
     if "choices" in output and len(output["choices"]) > 0:
