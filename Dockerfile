@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 WORKDIR /app  
 
 # Install dependencies  
-RUN apt update && apt install -y git g++ cmake make python3 python3-pip wget ninja-build dos2unix  
+RUN apt update && apt install -y git g++ cmake make python3 python3-pip wget ninja-build dos2unix  pydantic
 
 # Clone and build llama.cpp  
 RUN git clone https://github.com/ggerganov/llama.cpp.git  
