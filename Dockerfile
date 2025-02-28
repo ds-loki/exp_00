@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 WORKDIR /app  
 
 # Install dependencies  
-RUN apt update && apt install -y git g++ cmake make python3 python3-pip wget ninja-build dos2unix  pydantic
+RUN apt update && apt install -y git g++ cmake make python3 python3-pip wget ninja-build dos2unix
 
 # Clone and build llama.cpp  
 RUN git clone https://github.com/ggerganov/llama.cpp.git  
@@ -11,7 +11,7 @@ WORKDIR /app/llama.cpp
 RUN cmake . && make -j4  
 
 # Install Python dependencies  
-RUN pip3 install fastapi uvicorn llama-cpp-python  
+RUN pip3 install fastapi uvicorn llama-cpp-python pydantic
 
 # Download GGUF model  
 WORKDIR /app  
